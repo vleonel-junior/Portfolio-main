@@ -1,0 +1,135 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Projects data
+const projects = [
+  {
+    title: "Portfolio Personnel",
+    description: "Site web personnel développé avec Astro.js et Tailwind CSS. Design moderne, performance optimisée et blog intégré.",
+    image: "/images/portfolio-project.jpg",
+    technologies: ["Astro", "TypeScript", "Tailwind CSS", "MDX"],
+    liveUrl: "https://votre-portfolio.com",
+    githubUrl: "https://github.com/votre-username/portfolio",
+    featured: true,
+    category: "Web Development"
+  },
+  {
+    title: "Application React Dashboard",
+    description: "Dashboard administratif moderne avec React, Redux Toolkit et Material-UI. Gestion complète des utilisateurs et analytics.",
+    image: "/images/dashboard-project.jpg",
+    technologies: ["React", "Redux Toolkit", "Material-UI", "Chart.js"],
+    liveUrl: "https://demo-dashboard.com",
+    githubUrl: "https://github.com/votre-username/react-dashboard",
+    featured: true,
+    category: "Web Development"
+  },
+  {
+    title: "API REST Node.js",
+    description: "API REST robuste avec authentification JWT, validation de données et documentation Swagger. Déployée sur AWS.",
+    image: "/images/api-project.jpg",
+    technologies: ["Node.js", "Express", "MongoDB", "JWT", "Swagger"],
+    liveUrl: null,
+    githubUrl: "https://github.com/votre-username/node-api",
+    featured: false,
+    category: "Backend"
+  },
+  {
+    title: "Application Mobile React Native",
+    description: "Application mobile cross-platform pour la gestion de tâches avec synchronisation cloud et notifications push.",
+    image: "/images/mobile-project.jpg",
+    technologies: ["React Native", "Firebase", "AsyncStorage", "Push Notifications"],
+    liveUrl: "https://play.google.com/store/apps/details?id=com.votre-app",
+    githubUrl: "https://github.com/votre-username/react-native-app",
+    featured: false,
+    category: "Mobile"
+  },
+  {
+    title: "Site E-commerce Shopify",
+    description: "Boutique en ligne personnalisée avec thème Shopify sur-mesure, optimisations de performance et intégrations tierces.",
+    image: "/images/ecommerce-project.jpg",
+    technologies: ["Shopify", "Liquid", "SCSS", "JavaScript", "APIs"],
+    liveUrl: "https://boutique-demo.com",
+    githubUrl: null,
+    featured: false,
+    category: "E-commerce"
+  },
+  {
+    title: "Extension Chrome",
+    description: "Extension de productivité pour développeurs avec raccourcis personnalisés et intégration GitHub.",
+    image: "/images/extension-project.jpg",
+    technologies: ["JavaScript", "Chrome APIs", "HTML", "CSS"],
+    liveUrl: "https://chrome.google.com/webstore/detail/extension-id",
+    githubUrl: "https://github.com/votre-username/chrome-extension",
+    featured: false,
+    category: "Tools"
+  }
+];
+
+const categories = [...new Set(projects.map(p => p.category))];
+---
+
+<Layout title="Projets - Léonel VODOUNOU" description="Découvrez mes projets de développement web, applications mobiles et outils.">
+  <section class="py-20 md:py-32">
+    <div class="container-custom">
+      <div class="max-w-4xl mb-16">
+        <h1 class="text-4xl md:text-5xl font-serif font-bold mb-6 text-quartz dark:text-quartz-light">Projets</h1>
+        <p class="text-xl text-quartz/70 dark:text-quartz-light/80 max-w-2xl leading-relaxed">
+          Une sélection de mes travaux en ingénierie logicielle et intelligence artificielle.
+        </p>
+      </div>
+
+      <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
+        {projects.map((project) => (
+          <article class="group flex flex-col h-full dark:bg-white dark:p-6 dark:rounded-lg dark:shadow-xl transition-all">
+            {project.image && (
+              <div class="aspect-[16/9] overflow-hidden rounded-lg mb-6 bg-quartz/5">
+                <img 
+                  src={project.image} 
+                  alt={project.title}
+                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
+              </div>
+            )}
+            
+            <div class="flex flex-col flex-grow">
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs font-medium uppercase tracking-wider text-quartz/50">
+                  {project.category}
+                </span>
+                <div class="flex gap-3">
+                  {project.githubUrl && (
+                    <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" class="text-quartz/40 hover:text-quartz transition-colors" aria-label="GitHub">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    </a>
+                  )}
+                  {project.liveUrl && (
+                    <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" class="text-quartz/40 hover:text-quartz transition-colors" aria-label="Live Demo">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                    </a>
+                  )}
+                </div>
+              </div>
+
+              <h2 class="text-2xl font-serif font-bold text-quartz mb-3 group-hover:text-quartz/70 transition-colors">
+                {project.title}
+              </h2>
+              
+              <p class="text-quartz/70 leading-relaxed mb-6 flex-grow">
+                {project.description}
+              </p>
+              
+              <div class="flex flex-wrap gap-2 mt-auto pt-4 border-t border-quartz/10">
+                {project.technologies.map((tech) => (
+                  <span class="text-xs font-mono text-quartz/60 bg-quartz/5 px-2 py-1 rounded">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

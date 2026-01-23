@@ -1,0 +1,81 @@
+<!-- Giscus Comments Component - Beige & Pro (Substack inspired) -->
+<div
+  class="comments-section mt-16 pt-12 border-t border-quartz/10 dark:border-quartz-light/10"
+>
+  <div class="max-w-3xl mx-auto">
+    <!-- Pro Header -->
+    <div class="flex items-center justify-between mb-8">
+      <h3
+        class="text-2xl font-serif font-bold text-quartz dark:text-quartz-light flex items-center gap-3"
+      >
+        Discussion
+        <span
+          class="text-sm font-sans font-normal px-2 py-0.5 rounded-full bg-quartz/5 text-quartz/70 dark:bg-white/10 dark:text-white/70"
+        >
+          Commentaires
+        </span>
+      </h3>
+    </div>
+
+    <!-- Clean Beige Card -->
+    <div
+      class="bg-[#FDFBF7] dark:bg-[#1a202c] border border-[rgba(0,0,0,0.05)] dark:border-[rgba(255,255,255,0.05)] rounded-xl p-1 shadow-sm"
+    >
+      <div class="p-6 md:p-8">
+        <div id="giscus-container" class="min-h-[200px]"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  window.addEventListener("DOMContentLoaded", function () {
+    var script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.setAttribute("data-repo", "vleonel-junior/Portfolio");
+    script.setAttribute("data-repo-id", "R_kgDOQlnePw");
+    script.setAttribute("data-category", "General");
+    script.setAttribute("data-category-id", "DIC_kwDOQlneP84Czlgh");
+    script.setAttribute("data-mapping", "pathname");
+    script.setAttribute("data-strict", "0");
+    script.setAttribute("data-reactions-enabled", "1");
+    script.setAttribute("data-emit-metadata", "0");
+    script.setAttribute("data-input-position", "top");
+    script.setAttribute(
+      "data-theme",
+      document.documentElement.classList.contains("dark") ? "dark" : "light",
+    );
+    script.setAttribute("data-lang", "fr");
+    script.setAttribute("crossorigin", "anonymous");
+    script.async = true;
+
+    var container = document.getElementById("giscus-container");
+    if (container) {
+      container.appendChild(script);
+    }
+
+    // Update Giscus theme when it changes
+    var observer = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        if (mutation.attributeName === "class") {
+          var isDark = document.documentElement.classList.contains("dark");
+          var iframe = document.querySelector("iframe.giscus-frame");
+          if (iframe && iframe.contentWindow) {
+            iframe.contentWindow.postMessage(
+              {
+                giscus: {
+                  setConfig: {
+                    theme: isDark ? "dark" : "light",
+                  },
+                },
+              },
+              "https://giscus.app",
+            );
+          }
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, { attributes: true });
+  });
+</script>

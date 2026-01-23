@@ -1,0 +1,124 @@
+---
+import Layout from "../layouts/Layout.astro";
+import BlogCard from "../components/ui/BlogCard.astro";
+import { getCollection } from "astro:content";
+
+// Get latest blog posts
+const allPosts = await getCollection("blog");
+const latestPosts = allPosts
+	.filter((post) => !post.data.draft)
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 3);
+---
+
+<Layout
+	title="Léonel VODOUNOU - Génie Mathématique & IA"
+	description="Portfolio de Léonel VODOUNOU, spécialisé en Modélisation Aléatoire, Statistique et Deep Learning."
+>
+	<!-- Hero Section -->
+	<section class="py-24 md:py-32">
+		<div class="container-custom">
+			<div class="max-w-4xl">
+				<div class="inline-block mb-6 px-3 py-1 rounded-full border border-quartz/20 dark:border-quartz-light/20 text-xs font-medium uppercase tracking-wider text-quartz/60 dark:text-quartz-light/60">
+					Génie Mathématique & Recherche en IA
+				</div>
+				
+				<h1 class="text-5xl md:text-7xl font-serif font-medium text-quartz dark:text-quartz-light mb-8 leading-[1.1]">
+					Combler le fossé entre <br/>
+					<span class="italic text-quartz/60 dark:text-quartz-light/70">théorie mathématique</span> et <br/>
+					ingénierie de l'IA.
+				</h1>
+
+				<p class="text-xl md:text-2xl text-quartz/70 dark:text-quartz-light/80 max-w-2xl leading-relaxed mb-12">
+					Je construis des systèmes d'IA robustes et interprétables en m'appuyant sur des fondements probabilistes solides.
+				</p>
+
+				<div class="flex flex-wrap gap-4">
+					<a href="/projects" class="btn-primary">
+						Voir les projets
+					</a>
+					<a href="/blog" class="btn-secondary">
+						Lire le blog
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- About / Approach Section -->
+	<section class="py-20 bg-quartz text-quartz-light">
+		<div class="container-custom">
+			<div class="grid md:grid-cols-2 gap-16 items-start">
+				<div>
+					<h2 class="text-3xl md:text-4xl font-serif mb-6">Mon Approche</h2>
+					<p class="text-lg text-quartz-light/80 leading-relaxed mb-6">
+						Issu d'une formation en génie mathématique, je ne vois pas les modèles d'IA comme des boîtes noires, mais comme des systèmes dynamiques régis par des principes probabilistes.
+					</p>
+					<p class="text-lg text-quartz-light/80 leading-relaxed">
+						Mon objectif est d'utiliser cette rigueur pour construire des modèles non seulement performants, mais aussi plus robustes, interprétables et efficaces.
+					</p>
+				</div>
+				
+				<div class="grid grid-cols-2 gap-8">
+					<div>
+						<h3 class="font-serif text-xl mb-4 text-quartz-accent">Expertise</h3>
+						<ul class="space-y-2 text-quartz-light/70">
+							<li>Deep Learning</li>
+							<li>LLMs & NLP</li>
+							<li>Computer Vision</li>
+							<li>Modélisation Stochastique</li>
+						</ul>
+					</div>
+					<div>
+						<h3 class="font-serif text-xl mb-4 text-quartz-accent">Outils</h3>
+						<ul class="space-y-2 text-quartz-light/70">
+							<li>PyTorch / TensorFlow</li>
+							<li>Python / R</li>
+							<li>Docker / MLOps</li>
+							<li>Hugging Face</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Latest Research/Blog -->
+	<section class="py-24">
+		<div class="container-custom">
+			<div class="flex justify-between items-end mb-12">
+				<h2 class="text-3xl md:text-4xl font-serif text-quartz dark:text-quartz-light">Recherche & Articles</h2>
+				<a href="/blog" class="hidden md:inline-block text-sm font-medium text-quartz/60 dark:text-quartz-light/60 hover:text-quartz dark:hover:text-quartz-light transition-colors">
+					Voir tout →
+				</a>
+			</div>
+
+			{latestPosts.length > 0 ? (
+				<div class="grid md:grid-cols-3 gap-8">
+					{latestPosts.map((post) => (
+						<BlogCard
+							title={post.data.title}
+							description={post.data.description}
+							pubDate={post.data.pubDate}
+							image={post.data.image}
+							tags={post.data.tags}
+							category={post.data.category}
+							readTime={post.data.readTime}
+							href={`/blog/${post.slug}`}
+						/>
+					))}
+				</div>
+			) : (
+				<div class="text-center py-12 border border-dashed border-quartz/20 dark:border-quartz-light/20 rounded-lg">
+					<p class="text-quartz/50 dark:text-quartz-light/50">Aucun article pour le moment.</p>
+				</div>
+			)}
+			
+			<div class="mt-8 md:hidden text-center">
+				<a href="/blog" class="text-sm font-medium text-quartz/60 dark:text-quartz-light/60 hover:text-quartz dark:hover:text-quartz-light transition-colors">
+					Voir tout →
+				</a>
+			</div>
+		</div>
+	</section>
+</Layout>

@@ -1,0 +1,142 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const experiments = [
+    {
+        title: "StochasticML",
+        description: "Optimisation probabiliste pour l'apprentissage profond. Implémentation custom d'optimiseurs SGD avancés.",
+        tags: ["Research", "Python", "Maths"],
+        status: "Prototype",
+        color: "bg-blue-500",
+        icon: "🧠"
+    },
+    {
+        title: "AI-Interpretability",
+        description: "Visualisation de l'espace latent des Transformers. Exploration des mécanismes d'attention.",
+        tags: ["Deep Learning", "Viz", "D3.js"],
+        status: "Experimental",
+        color: "bg-purple-500",
+        icon: "🔬"
+    },
+    {
+        title: "FastML-Pipeline",
+        description: "Architecture MLOps pour le déploiement de modèles à haute disponibilité.",
+        tags: ["System", "Docker", "Rust"],
+        status: "Production",
+        color: "bg-green-500",
+        icon: "⚡"
+    },
+    {
+        title: "Math-AI-Explorer",
+        description: "Simulations interactives des concepts mathématiques fondamentaux du ML.",
+        tags: ["Education", "React", "WebGL"],
+        status: "Beta",
+        color: "bg-orange-500",
+        icon: "🌐"
+    }
+];
+
+const openSource = [
+    { name: "Hugging Face", role: "Contributor", desc: "Optimisation Transformers" },
+    { name: "PyTorch", role: "Core", desc: "Stochastic Optimizers" },
+    { name: "Scikit-learn", role: "Contributor", desc: "Clustering Algos" },
+    { name: "Matplotlib", role: "Contributor", desc: "Viz Tools" },
+];
+---
+
+<Layout
+    title="Lab & Recherche - Léonel VODOUNOU"
+    description="Laboratoire d'expérimentations techniques, recherche en IA et mathématiques."
+>
+    <main class="pt-20 pb-24">
+        <!-- Lab Header -->
+        <section class="container px-4 md:px-6 py-12">
+            <div class="max-w-4xl">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="px-3 py-1 rounded-full bg-quartz/10 dark:bg-quartz-light/10 text-quartz dark:text-quartz-light text-sm font-mono font-medium">
+                        v2.0.4-beta
+                    </span>
+                    <h1 class="text-4xl md:text-6xl font-serif font-bold text-quartz dark:text-quartz-light">
+                        Lab & Recherche
+                    </h1>
+                </div>
+                <p class="text-xl text-quartz/70 dark:text-quartz-light/80 max-w-2xl leading-relaxed font-sans">
+                    Zone d'expérimentation technique. Prototypes "sales", implémentations de papiers de recherche et contributions Open Source.
+                </p>
+            </div>
+        </section>
+
+        <!-- Bento Grid Experiments -->
+        <section class="container px-4 md:px-6 mb-20">
+            <h2 class="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-8 flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                Active Experiments
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-[250px]">
+                {experiments.map((item, i) => (
+                    <div class={`group relative p-6 rounded-2xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden ${i === 0 || i === 3 ? 'md:col-span-2' : ''}`}>
+                        
+                        <!-- Background Glow -->
+                        <div class={`absolute -right-12 -top-12 w-48 h-48 rounded-full opacity-0 group-hover:opacity-10 transition-opacity duration-500 blur-3xl ${item.color}`}></div>
+
+                        <div class="relative z-10">
+                            <div class="flex justify-between items-start mb-4">
+                                <span class="text-4xl mb-2 filter grayscale group-hover:grayscale-0 transition-all duration-300">{item.icon}</span>
+                                <span class="px-2 py-1 text-[10px] font-mono uppercase tracking-wide border border-gray-200 dark:border-gray-600 rounded bg-gray-50 dark:bg-gray-900 text-gray-500 dark:text-gray-400">
+                                    {item.status}
+                                </span>
+                            </div>
+                            
+                            <h3 class="text-2xl font-serif font-bold text-quartz dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                                {item.title}
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-4">
+                                {item.description}
+                            </p>
+                        </div>
+
+                        <div class="flex flex-wrap gap-2 relative z-10">
+                            {item.tags.map(tag => (
+                                <span class="text-xs font-mono px-2 py-1 rounded bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300">
+                                    #{tag}
+                                </span>
+                            ))}
+                        </div>
+                        
+                        <!-- Hover Arrow -->
+                        <div class="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                            <svg class="w-6 h-6 text-quartz dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </section>
+
+        <!-- Open Source Matrix -->
+        <section class="container px-4 md:px-6">
+            <h2 class="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-8">
+                Open Source Contributions
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                {openSource.map((oss) => (
+                    <div class="p-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50 hover:bg-white dark:hover:bg-gray-800 transition-colors cursor-default">
+                        <div class="flex justify-between items-center mb-2">
+                            <h4 class="font-bold text-quartz dark:text-white">{oss.name}</h4>
+                            <span class={`text-[10px] px-2 py-0.5 rounded-full ${oss.role === 'Core' ? 'bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300' : 'bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300'}`}>
+                                {oss.role}
+                            </span>
+                        </div>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 font-mono">
+                            {oss.desc}
+                        </p>
+                    </div>
+                ))}
+            </div>
+        </section>
+
+    </main>
+</Layout>

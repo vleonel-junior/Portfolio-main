@@ -1,0 +1,96 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Comments from "../../components/Comments.astro";
+import TableOfContents from "../../components/TableOfContents.astro";
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+
+export async function getStaticPaths() {
+    const posts = await getCollection("blog");
+    return posts.map((post) => ({
+        params: { slug: post.slug },
+        props: post,
+    }));
+}
+
+type Props = CollectionEntry<"blog">;
+
+const post = Astro.props;
+const { Content, headings } = await post.render();
+
+const formattedDate = post.data.pubDate.toLocaleDateString("fr-FR", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+});
+---
+
+<Layout
+    title={post.data.title}
+    description={post.data.description}
+    image={post.data.image}
+    type="article"
+>
+    <main class="flex-1 pt-24 pb-16">
+        <!-- Article Header (Full Width) -->
+        <header class="container px-4 md:px-6 mb-12">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1
+                    class="text-4xl md:text-5xl font-serif font-bold text-quartz dark:text-quartz-light mb-6"
+                >
+                    {post.data.title}
+                </h1>
+
+                <div
+                    class="flex items-center justify-center gap-4 text-gray-600 dark:text-gray-400 text-sm"
+                >
+                    <time datetime={post.data.pubDate.toISOString()}>
+                        {formattedDate}
+                    </time>
+                    {
+                        post.data.readTime && (
+                            <>
+                                <span>•</span>
+                                <span>{post.data.readTime} min de lecture</span>
+                            </>
+                        )
+                    }
+                </div>
+            </div>
+        </header>
+
+        <div class="container px-4 md:px-6">
+            <div
+                class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-12"
+            >
+                <!-- Sidebar (TOC) - Desktop Only -->
+                <aside class="hidden lg:block">
+                    <div class="sticky top-32">
+                        <TableOfContents headings={headings} />
+                    </div>
+                </aside>
+
+                <!-- Main Content Column -->
+                <div class="min-w-0">
+                    <!-- Article Content -->
+                    <article
+                        class="prose prose-lg dark:prose-invert max-w-none
+                        prose-headings:font-bold prose-headings:text-gray-900 dark:prose-headings:text-white prose-headings:scroll-mt-32
+                        prose-p:text-gray-700 dark:prose-p:text-gray-300
+                        prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-a:no-underline hover:prose-a:underline
+                        prose-strong:text-gray-900 dark:prose-strong:text-white
+                        prose-code:text-blue-600 dark:prose-code:text-blue-400 prose-code:bg-gray-100 dark:prose-code:bg-gray-800 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none
+                        prose-pre:bg-gray-900 dark:prose-pre:bg-gray-800 prose-pre:border prose-pre:border-gray-200 dark:prose-pre:border-gray-700
+                        prose-blockquote:border-l-blue-500 prose-blockquote:bg-blue-50 dark:prose-blockquote:bg-blue-900/20 prose-blockquote:py-1 prose-blockquote:px-4 prose-blockquote:rounded-r
+                        prose-img:rounded-lg prose-img:shadow-lg mb-16"
+                    >
+                        <Content />
+                    </article>
+
+                    <!-- Comments Section -->
+                    <Comments />
+                </div>
+            </div>
+        </div>
+    </main>
+</Layout>
