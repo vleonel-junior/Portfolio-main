@@ -1,5 +1,5 @@
 // @ts-check
-// Deployment trigger: test commit
+// Deployment trigger: FINAL FIX for subpath images and links (/Portfolio-main/)
 import { defineConfig } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';

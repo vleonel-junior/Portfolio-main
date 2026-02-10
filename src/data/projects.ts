@@ -7,7 +7,8 @@ export interface ProjectItem {
     liveUrl?: string;
     image?: string;
     year?: string;
-    category?: string; // Kept for compatibility if needed, but we will use separate arrays
+    category?: string;
+    featured?: boolean;
 }
 
 export const academicProjects: ProjectItem[] = [

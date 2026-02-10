@@ -14,7 +14,7 @@ export interface Props {
 const {
     title,
     description = "Léonel VODOUNOU - Génie Mathématique & IA",
-    image = "/images/og-image.jpg",
+    image = `${import.meta.env.BASE_URL}images/og-image.jpg`,
     type = "website",
 } = Astro.props;
 
@@ -27,7 +27,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         <meta charset="UTF-8" />
         <meta name="description" content={description} />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link
+            rel="icon"
+            type="image/svg+xml"
+            href={`${import.meta.env.BASE_URL}favicon.svg`}
+        />
         <meta name="generator" content={Astro.generator} />
 
         <!-- Canonical URL -->
@@ -54,33 +58,36 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         <!-- Theme Script -->
         <script is:inline>
             const theme = (() => {
-                if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-                    return localStorage.getItem('theme');
+                if (
+                    typeof localStorage !== "undefined" &&
+                    localStorage.getItem("theme")
+                ) {
+                    return localStorage.getItem("theme");
                 }
-                if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                    return 'dark';
+                if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+                    return "dark";
                 }
-                return 'light';
+                return "light";
             })();
-        
-            if (theme === 'dark') {
-                document.documentElement.classList.add('dark');
+
+            if (theme === "dark") {
+                document.documentElement.classList.add("dark");
             } else {
-                document.documentElement.classList.remove('dark');
+                document.documentElement.classList.remove("dark");
             }
-        
-            window.localStorage.setItem('theme', theme);
+
+            window.localStorage.setItem("theme", theme);
         </script>
     </head>
 
     <body class="antialiased flex flex-col min-h-screen relative">
         <!-- Starfield Background (Dark Mode Only) -->
         <Starfield />
-        
+
         <!-- Content -->
         <div class="relative z-10 flex flex-col min-h-screen">
             <Header />
-            
+
             <main class="flex-grow pt-20">
                 <slot />
             </main>

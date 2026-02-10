@@ -1,9 +1,8 @@
 ---
 const navItems = [
-  { name: "About", href: "/#about" },
-  { name: "Projects", href: "/projects" },
-  { name: "Blog", href: "/blog" },
-
+  { name: "About", href: `${import.meta.env.BASE_URL}#about` },
+  { name: "Projects", href: `${import.meta.env.BASE_URL}projects` },
+  { name: "Blog", href: `${import.meta.env.BASE_URL}blog` },
 ];
 ---
 
@@ -12,9 +11,9 @@ const navItems = [
 >
   <div class="container-custom h-16 flex items-center justify-between">
     <!-- Logo - Image only on mobile, full name on desktop -->
-    <a href="/" class="flex items-center gap-3">
+    <a href={import.meta.env.BASE_URL} class="flex items-center gap-3">
       <img
-        src="/logo.jpg"
+        src={`${import.meta.env.BASE_URL}logo.jpg`}
         alt="Logo"
         class="h-10 w-10 object-cover rounded-full flex-shrink-0"
       />
@@ -85,7 +84,7 @@ const navItems = [
       </button>
 
       <a
-        href="/cv.pdf"
+        href={`${import.meta.env.BASE_URL}cv.pdf`}
         class="text-sm font-medium px-4 py-2 bg-quartz-light text-quartz rounded-full hover:opacity-90 transition-opacity"
       >
         Resume
@@ -191,7 +190,7 @@ const navItems = [
       </button>
 
       <a
-        href="/cv.pdf"
+        href={`${import.meta.env.BASE_URL}cv.pdf`}
         class="mobile-menu-link py-3 px-4 rounded-lg text-base font-medium text-quartz-light/80 hover:text-white hover:bg-white/5 transition-colors"
       >
         Resume
