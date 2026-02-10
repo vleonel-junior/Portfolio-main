@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
 @plugin "@tailwindcss/typography";
 
 /* Force dark mode to work with class strategy */
@@ -21,8 +22,6 @@
     --color-border-primary: var(--border-primary);
 }
 
-/* Import Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
 
 :root {
     /* Light Mode (Default) */

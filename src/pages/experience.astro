@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { experienceData } from "../data/experience";
 ---
 
 <Layout
@@ -23,168 +24,34 @@ import Layout from "../layouts/Layout.astro";
         <!-- Timeline -->
         <section class="container pb-16">
             <div class="max-w-4xl mx-auto">
-                <!-- Experience Item -->
-                <div
-                    class="relative border-l-2 border-blue-200 dark:border-blue-800 ml-6 pb-12"
-                >
-                    <div
-                        class="absolute -left-3 bg-blue-500 w-6 h-6 rounded-full border-4 border-white dark:border-gray-900"
-                    >
-                    </div>
-                    <div class="ml-8">
-                        <div
-                            class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2"
-                        >
-                            <h3
-                                class="heading-3 text-blue-600 dark:text-blue-400"
-                            >
-                                Chercheur en IA & Modélisation
-                            </h3>
-                            <span
-                                class="text-sm text-gray-500 dark:text-gray-400 font-medium"
-                                >2024 - Présent</span
-                            >
+                {
+                    experienceData.map((exp, index) => (
+                        <div class="relative border-l-2 border-blue-200 dark:border-blue-800 ml-6 pb-12">
+                            <div class="absolute -left-3 bg-blue-500 w-6 h-6 rounded-full border-4 border-white dark:border-gray-900" />
+                            <div class="ml-8">
+                                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
+                                    <h3 class="heading-3 text-blue-600 dark:text-blue-400">
+                                        {exp.role}
+                                    </h3>
+                                    <span class="text-sm text-gray-500 dark:text-gray-400 font-medium">
+                                        {exp.startDate} - {exp.endDate}
+                                    </span>
+                                </div>
+                                <p class="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">
+                                    {exp.company}
+                                </p>
+                                <p class="body-text mb-4">{exp.description}</p>
+                                <div class="flex flex-wrap gap-2">
+                                    {exp.technologies.map((tech) => (
+                                        <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full text-sm">
+                                            {tech}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
-                        <p
-                            class="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3"
-                        >
-                            Institut de Recherche
-                        </p>
-                        <p class="body-text mb-4">
-                            Développement de modèles d'IA innovants en
-                            appliquant des techniques de modélisation
-                            stochastique et d'analyse probabiliste pour
-                            améliorer la robustesse et l'interprétabilité des
-                            systèmes intelligents.
-                        </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span
-                                class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full text-sm"
-                                >Deep Learning</span
-                            >
-                            <span
-                                class="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-full text-sm"
-                                >Modélisation Stochastique</span
-                            >
-                            <span
-                                class="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-full text-sm"
-                                >PyTorch</span
-                            >
-                            <span
-                                class="px-3 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 rounded-full text-sm"
-                                >Recherche</span
-                            >
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Experience Item -->
-                <div
-                    class="relative border-l-2 border-blue-200 dark:border-blue-800 ml-6 pb-12"
-                >
-                    <div
-                        class="absolute -left-3 bg-blue-500 w-6 h-6 rounded-full border-4 border-white dark:border-gray-900"
-                    >
-                    </div>
-                    <div class="ml-8">
-                        <div
-                            class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2"
-                        >
-                            <h3
-                                class="heading-3 text-blue-600 dark:text-blue-400"
-                            >
-                                Ingénieur ML/Data Science
-                            </h3>
-                            <span
-                                class="text-sm text-gray-500 dark:text-gray-400 font-medium"
-                                >2023 - 2024</span
-                            >
-                        </div>
-                        <p
-                            class="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3"
-                        >
-                            Startup Tech
-                        </p>
-                        <p class="body-text mb-4">
-                            Conception et déploiement de pipelines ML en
-                            production, avec un focus sur l'optimisation des
-                            performances et la scalabilité des modèles
-                            d'apprentissage automatique.
-                        </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span
-                                class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full text-sm"
-                                >MLOps</span
-                            >
-                            <span
-                                class="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-full text-sm"
-                                >Python</span
-                            >
-                            <span
-                                class="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-full text-sm"
-                                >TensorFlow</span
-                            >
-                            <span
-                                class="px-3 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 rounded-full text-sm"
-                                >Docker</span
-                            >
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Experience Item -->
-                <div
-                    class="relative border-l-2 border-blue-200 dark:border-blue-800 ml-6 pb-12"
-                >
-                    <div
-                        class="absolute -left-3 bg-blue-500 w-6 h-6 rounded-full border-4 border-white dark:border-gray-900"
-                    >
-                    </div>
-                    <div class="ml-8">
-                        <div
-                            class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2"
-                        >
-                            <h3
-                                class="heading-3 text-blue-600 dark:text-blue-400"
-                            >
-                                Assistant de Recherche
-                            </h3>
-                            <span
-                                class="text-sm text-gray-500 dark:text-gray-400 font-medium"
-                                >2022 - 2023</span
-                            >
-                        </div>
-                        <p
-                            class="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3"
-                        >
-                            Université
-                        </p>
-                        <p class="body-text mb-4">
-                            Assistance dans des projets de recherche sur
-                            l'optimisation stochastique et l'analyse de données
-                            complexes, développement d'algorithmes pour la
-                            modélisation prédictive.
-                        </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span
-                                class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full text-sm"
-                                >Recherche</span
-                            >
-                            <span
-                                class="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-full text-sm"
-                                >Statistiques</span
-                            >
-                            <span
-                                class="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-full text-sm"
-                                >R</span
-                            >
-                            <span
-                                class="px-3 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 rounded-full text-sm"
-                                >Matlab</span
-                            >
-                        </div>
-                    </div>
-                </div>
+                    ))
+                }
 
                 <!-- Final dot -->
                 <div
@@ -215,7 +82,7 @@ import Layout from "../layouts/Layout.astro";
                     class="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto"
                 >
                     <div
-                        class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border"
+                        class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border dark:border-gray-700"
                     >
                         <div class="text-3xl mb-4">📊</div>
                         <h3 class="heading-3 mb-2">Modèles en Production</h3>
@@ -226,7 +93,7 @@ import Layout from "../layouts/Layout.astro";
                     </div>
 
                     <div
-                        class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border"
+                        class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border dark:border-gray-700"
                     >
                         <div class="text-3xl mb-4">📝</div>
                         <h3 class="heading-3 mb-2">Publications</h3>
@@ -237,7 +104,7 @@ import Layout from "../layouts/Layout.astro";
                     </div>
 
                     <div
-                        class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border"
+                        class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border dark:border-gray-700"
                     >
                         <div class="text-3xl mb-4">🏆</div>
                         <h3 class="heading-3 mb-2">Prix & Reconnaissances</h3>
