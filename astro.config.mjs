@@ -13,7 +13,8 @@ import preact from '@astrojs/preact';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://elonmj.github.io',
+  site: 'https://vleonel-junior.github.io',
+  base: '/Portfolio-main/',
   vite: {
     plugins: [tailwindcss()]
   },
