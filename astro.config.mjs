@@ -9,17 +9,16 @@ import sitemap from '@astrojs/sitemap';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 
+import preact from '@astrojs/preact';
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://elonmj.github.io',
   vite: {
     plugins: [tailwindcss()]
   },
-  integrations: [
-    mdx({
-      remarkPlugins: [remarkMath],
-      rehypePlugins: [rehypeKatex]
-    }),
-    sitemap()
-  ]
+  integrations: [mdx({
+    remarkPlugins: [remarkMath],
+    rehypePlugins: [rehypeKatex]
+  }), sitemap(), preact()]
 });

@@ -1,54 +1,114 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
 
-const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+const posts = (await getCollection("blog")).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 
 const title = "Blog - Léonel VODOUNOU";
-const description = "Articles sur le Génie Mathématique, l'IA et le Deep Learning.";
+const description =
+	"Articles sur le Génie Mathématique, l'IA et le Deep Learning.";
 ---
 
 <Layout title={title} description={description}>
 	<section class="py-20 md:py-32">
 		<div class="container-custom max-w-4xl">
-			<h1 class="text-4xl md:text-5xl font-serif font-bold mb-6 text-quartz dark:text-quartz-light">Blog</h1>
-			<p class="text-xl text-quartz/70 dark:text-quartz-light/80 mb-16 max-w-2xl">
-				Explorations à l'intersection des mathématiques et de l'intelligence artificielle.
-				Notes de recherche, tutoriels et réflexions.
-			</p>
+			<h1
+				class="text-4xl md:text-5xl font-serif font-bold mb-16 text-quartz dark:text-quartz-light"
+			>
+				Blog
+			</h1>
 
-			<div class="space-y-12">
-				{posts.map((post) => (
-					<article class="group relative flex flex-col md:flex-row gap-2 md:gap-8 items-baseline hover:bg-quartz/5 dark:hover:bg-white/5 p-4 -mx-4 rounded-xl transition-colors">
-						<div class="md:w-32 flex-shrink-0 text-sm text-quartz/50 dark:text-quartz-light/50 font-medium font-mono">
-							<time datetime={post.data.pubDate.toISOString()}>
-								{post.data.pubDate.toLocaleDateString('fr-FR', {
-									year: 'numeric',
-									month: 'short',
-									day: 'numeric',
-								})}
-							</time>
-						</div>
-						
-						<div class="flex-grow">
-							<h2 class="text-2xl font-serif font-bold text-quartz dark:text-quartz-light group-hover:text-quartz-dark dark:group-hover:text-white transition-colors mb-2">
-								<a href={`/blog/${post.slug}/`}>
-									<span class="absolute inset-0"></span>
-									{post.data.title}
-								</a>
-							</h2>
-							<p class="text-quartz/70 dark:text-quartz-light/80 leading-relaxed mb-3">
-								{post.data.description}
-							</p>
-							<div class="flex gap-3 text-xs font-medium uppercase tracking-wider text-quartz/40 dark:text-quartz-light/40">
-								<span>{post.data.category}</span>
-								{post.data.readTime && <span>• {post.data.readTime} min read</span>}
+			<div class="divide-y divide-quartz/5 dark:divide-white/5">
+				{
+					posts.map((post) => (
+						<article class="group py-12 first:pt-0 last:pb-0">
+							<div class="flex flex-col md:flex-row gap-8 items-start">
+								{/* Content Left */}
+								<div class="flex-1 min-w-0">
+									<div class="flex items-center gap-3 text-xs font-medium uppercase tracking-wider text-quartz/50 dark:text-quartz-light/50 mb-3">
+										<span class="text-green-700 dark:text-green-400 font-bold">
+											{post.data.category}
+										</span>
+										<span>•</span>
+										<time
+											datetime={post.data.pubDate.toISOString()}
+										>
+											{post.data.pubDate.toLocaleDateString(
+												"fr-FR",
+												{
+													year: "numeric",
+													month: "short",
+													day: "numeric",
+												},
+											)}
+										</time>
+										{post.data.readTime && (
+											<>
+												<span>•</span>
+												<span>
+													{post.data.readTime} min
+													read
+												</span>
+											</>
+										)}
+									</div>
+
+									<h2 class="text-2xl md:text-3xl font-serif font-bold text-quartz dark:text-quartz-light group-hover:text-green-800 dark:group-hover:text-green-400 transition-colors mb-3 leading-tight">
+										<a href={`/blog/${post.slug}/`}>
+											{post.data.title}
+										</a>
+									</h2>
+
+									<p class="text-quartz/70 dark:text-quartz-light/80 leading-relaxed line-clamp-3 mb-4">
+										{post.data.description}
+									</p>
+
+									<div class="mt-auto">
+										<a
+											href={`/blog/${post.slug}/`}
+											class="text-sm font-bold text-quartz dark:text-quartz-light hover:underline flex items-center gap-1"
+										>
+											Read more
+											<svg
+												width="16"
+												height="16"
+												viewBox="0 0 24 24"
+												fill="none"
+												stroke="currentColor"
+												stroke-width="2.5"
+												stroke-linecap="round"
+												stroke-linejoin="round"
+											>
+												<>
+													<line
+														x1="5"
+														y1="12"
+														x2="19"
+														y2="12"
+													/>
+													<polyline points="12 5 19 12 12 19" />
+												</>
+											</svg>
+										</a>
+									</div>
+								</div>
+
+								{/* Image Right */}
+								{post.data.image && (
+									<div class="hidden sm:block w-32 h-32 md:w-40 md:h-40 flex-shrink-0 relative overflow-hidden rounded-xl border border-quartz/5 dark:border-white/5">
+										<img
+											src={post.data.image}
+											alt={post.data.title}
+											class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+										/>
+									</div>
+								)}
 							</div>
-						</div>
-					</article>
-				))}
+						</article>
+					))
+				}
 			</div>
 		</div>
 	</section>
