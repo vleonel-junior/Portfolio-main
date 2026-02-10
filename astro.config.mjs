@@ -1,4 +1,5 @@
 // @ts-check
+// Deployment trigger: test commit
 import { defineConfig } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
