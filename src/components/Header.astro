@@ -140,7 +140,7 @@ const navItems = [
   <!-- Menu Panel -->
   <div
     id="mobile-menu-panel"
-    class="absolute top-0 right-0 h-full w-72 bg-quartz transform translate-x-full transition-transform duration-300 shadow-2xl border-l border-white/10 flex flex-col"
+    class="absolute top-0 right-0 h-full w-64 bg-quartz transform translate-x-full transition-transform duration-300 shadow-2xl border-l border-white/10 flex flex-col"
   >
     <div class="px-14 py-8 pb-4 border-b border-white/5">
       <span
@@ -217,7 +217,7 @@ const navItems = [
     mobileMenuPanel?.classList.remove("translate-x-full");
     menuOpenIcon?.classList.add("hidden");
     menuCloseIcon?.classList.remove("hidden");
-    headerActions?.classList.add("-translate-x-72");
+    headerActions?.classList.add("-translate-x-64");
   }
 
   function closeMobileMenu() {
@@ -226,7 +226,7 @@ const navItems = [
     mobileMenuPanel?.classList.add("translate-x-full");
     menuOpenIcon?.classList.remove("hidden");
     menuCloseIcon?.classList.add("hidden");
-    headerActions?.classList.remove("-translate-x-72");
+    headerActions?.classList.remove("-translate-x-64");
   }
 
   mobileMenuBtn?.addEventListener("click", () => {
