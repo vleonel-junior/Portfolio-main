@@ -11,17 +11,22 @@ const navItems = [
 >
   <div class="container-custom h-16 flex items-center justify-between">
     <!-- Logo - Image only on mobile, full name on desktop -->
-    <a href={import.meta.env.BASE_URL} class="flex items-center gap-3">
+    <a href={import.meta.env.BASE_URL} class="flex items-center gap-2 sm:gap-3">
       <img
         src={`${import.meta.env.BASE_URL}logo.jpg`}
         alt="Logo"
         class="h-10 w-10 object-cover rounded-full flex-shrink-0"
       />
-      <span
-        class="text-sm sm:text-lg font-serif font-bold tracking-tight text-white whitespace-nowrap"
-      >
-        Léonel VODOUNOU
-      </span>
+      <div class="flex flex-col sm:flex-row leading-[1.1] sm:leading-normal">
+        <span
+          class="text-[13px] sm:text-lg font-serif font-bold tracking-tight text-white"
+          >Léonel</span
+        >
+        <span
+          class="text-[13px] sm:text-lg font-serif font-bold tracking-tight text-white sm:ml-1.5"
+          >VODOUNOU</span
+        >
+      </div>
     </a>
 
     <!-- Desktop Navigation -->
