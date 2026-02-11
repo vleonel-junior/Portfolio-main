@@ -18,7 +18,7 @@ const navItems = [
         class="h-10 w-10 object-cover rounded-full flex-shrink-0"
       />
       <span
-        class="text-sm sm:text-lg font-serif font-bold tracking-tight text-white truncate max-w-[150px] xs:max-w-none"
+        class="text-sm sm:text-lg font-serif font-bold tracking-tight text-white whitespace-nowrap"
       >
         Léonel VODOUNOU
       </span>
@@ -140,15 +140,15 @@ const navItems = [
   <!-- Menu Panel -->
   <div
     id="mobile-menu-panel"
-    class="absolute top-0 right-0 h-full w-64 bg-quartz transform translate-x-full transition-transform duration-300 shadow-2xl border-l border-white/10 flex flex-col"
+    class="absolute top-0 right-0 h-full w-[140px] bg-quartz transform translate-x-full transition-transform duration-300 shadow-2xl border-l border-white/10 flex flex-col"
   >
-    <div class="px-14 py-8 pb-4 border-b border-white/5">
+    <div class="py-10 pb-4 border-b border-white/5 text-center">
       <span
         class="text-white/30 uppercase tracking-[0.2em] text-xs font-bold font-sans"
         >Menu</span
       >
     </div>
-    <nav class="flex flex-col p-8 pt-4 gap-2">
+    <nav class="flex flex-col p-4 pt-4 gap-1 transform">
       {
         navItems.map((item) => {
           const itemPath = item.href.startsWith("/#") ? "/" : item.href;
@@ -159,7 +159,7 @@ const navItems = [
             <a
               href={item.href}
               class:list={[
-                "mobile-menu-link py-4 px-6 rounded-xl text-lg font-medium transition-all duration-200",
+                "mobile-menu-link py-4 px-2 rounded-xl text-lg font-medium transition-all duration-200 text-center",
                 isActive
                   ? "text-white font-bold"
                   : "text-quartz-light/60 hover:text-white",
@@ -217,7 +217,7 @@ const navItems = [
     mobileMenuPanel?.classList.remove("translate-x-full");
     menuOpenIcon?.classList.add("hidden");
     menuCloseIcon?.classList.remove("hidden");
-    headerActions?.classList.add("-translate-x-64");
+    headerActions?.classList.add("-translate-x-[140px]");
   }
 
   function closeMobileMenu() {
@@ -226,7 +226,7 @@ const navItems = [
     mobileMenuPanel?.classList.add("translate-x-full");
     menuOpenIcon?.classList.remove("hidden");
     menuCloseIcon?.classList.add("hidden");
-    headerActions?.classList.remove("-translate-x-64");
+    headerActions?.classList.remove("-translate-x-[140px]");
   }
 
   mobileMenuBtn?.addEventListener("click", () => {
