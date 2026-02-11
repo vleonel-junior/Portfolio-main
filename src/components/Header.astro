@@ -17,9 +17,11 @@ const navItems = [
         alt="Logo"
         class="h-10 w-10 object-cover rounded-full flex-shrink-0"
       />
-      <span class="text-lg font-serif font-bold tracking-tight text-white"
-        >Léonel VODOUNOU</span
+      <span
+        class="text-sm sm:text-lg font-serif font-bold tracking-tight text-white truncate max-w-[150px] xs:max-w-none"
       >
+        Léonel VODOUNOU
+      </span>
     </a>
 
     <!-- Desktop Navigation -->
@@ -87,7 +89,7 @@ const navItems = [
       <!-- Mobile Menu Button -->
       <button
         id="mobile-menu-btn"
-        class="md:hidden text-quartz-light p-2"
+        class="md:hidden text-quartz-light p-2 relative z-[70]"
         aria-label="Menu"
       >
         <svg
@@ -121,113 +123,111 @@ const navItems = [
       </button>
     </div>
   </div>
+</header>
 
-  <!-- Mobile Menu Overlay -->
-  <div id="mobile-menu" class="fixed inset-0 z-40 pointer-events-none">
-    <!-- Backdrop -->
-    <div
-      id="mobile-menu-backdrop"
-      class="absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-300"
-    >
-    </div>
-
-    <!-- Menu Panel -->
-    <div
-      id="mobile-menu-panel"
-      class="absolute top-0 right-0 h-full w-64 bg-quartz transform translate-x-full transition-transform duration-300 shadow-2xl"
-    >
-      <nav class="flex flex-col p-6 gap-1 mt-16">
-        {
-          navItems.map((item) => {
-            const itemPath = item.href.startsWith("/#") ? "/" : item.href;
-            const isActive =
-              Astro.url.pathname === itemPath ||
-              (itemPath !== "/" && Astro.url.pathname.startsWith(itemPath));
-            return (
-              <a
-                href={item.href}
-                class:list={[
-                  "mobile-menu-link py-3 px-4 rounded-lg text-base font-medium transition-colors",
-                  isActive
-                    ? "text-white bg-white/10 font-bold"
-                    : "text-quartz-light/80 hover:text-white hover:bg-white/5",
-                ]}
-              >
-                {item.name}
-              </a>
-            );
-          })
-        }
-
-        <div class="border-t border-quartz-light/10 my-4"></div>
-      </nav>
-    </div>
+<!-- Mobile Menu Overlay - Outside Header for Stacking Context -->
+<div id="mobile-menu" class="fixed inset-0 z-[60] pointer-events-none">
+  <!-- Backdrop -->
+  <div
+    id="mobile-menu-backdrop"
+    class="absolute inset-0 bg-black/60 opacity-0 transition-opacity duration-300"
+  >
   </div>
 
-  <script>
-    // Desktop theme toggle
-    const themeToggleBtn = document.getElementById("theme-toggle");
-    const lightIcon = document.getElementById("theme-toggle-light-icon");
-    const darkIcon = document.getElementById("theme-toggle-dark-icon");
+  <!-- Menu Panel -->
+  <div
+    id="mobile-menu-panel"
+    class="absolute top-0 right-0 h-full w-72 bg-quartz transform translate-x-full transition-transform duration-300 shadow-2xl border-l border-white/10"
+  >
+    <nav class="flex flex-col p-8 gap-2 mt-20">
+      {
+        navItems.map((item) => {
+          const itemPath = item.href.startsWith("/#") ? "/" : item.href;
+          const isActive =
+            Astro.url.pathname === itemPath ||
+            (itemPath !== "/" && Astro.url.pathname.startsWith(itemPath));
+          return (
+            <a
+              href={item.href}
+              class:list={[
+                "mobile-menu-link py-4 px-6 rounded-xl text-lg font-medium transition-all duration-200",
+                isActive
+                  ? "text-white bg-white/10 font-bold translate-x-1"
+                  : "text-quartz-light/60 hover:text-white hover:bg-white/5",
+              ]}
+            >
+              {item.name}
+            </a>
+          );
+        })
+      }
+    </nav>
+  </div>
+</div>
+
+<script>
+  // Desktop theme toggle
+  const themeToggleBtn = document.getElementById("theme-toggle");
+  const lightIcon = document.getElementById("theme-toggle-light-icon");
+  const darkIcon = document.getElementById("theme-toggle-dark-icon");
+
+  if (document.documentElement.classList.contains("dark")) {
+    darkIcon?.classList.remove("hidden");
+  } else {
+    lightIcon?.classList.remove("hidden");
+  }
+
+  function toggleTheme() {
+    lightIcon?.classList.toggle("hidden");
+    darkIcon?.classList.toggle("hidden");
 
     if (document.documentElement.classList.contains("dark")) {
-      darkIcon?.classList.remove("hidden");
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
     } else {
-      lightIcon?.classList.remove("hidden");
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
     }
+  }
 
-    function toggleTheme() {
-      lightIcon?.classList.toggle("hidden");
-      darkIcon?.classList.toggle("hidden");
+  themeToggleBtn?.addEventListener("click", toggleTheme);
 
-      if (document.documentElement.classList.contains("dark")) {
-        document.documentElement.classList.remove("dark");
-        localStorage.setItem("theme", "light");
-      } else {
-        document.documentElement.classList.add("dark");
-        localStorage.setItem("theme", "dark");
-      }
+  // Mobile menu
+  const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const mobileMenuBackdrop = document.getElementById("mobile-menu-backdrop");
+  const mobileMenuPanel = document.getElementById("mobile-menu-panel");
+  const menuOpenIcon = document.getElementById("menu-open-icon");
+  const menuCloseIcon = document.getElementById("menu-close-icon");
+
+  function openMobileMenu() {
+    mobileMenu?.classList.remove("pointer-events-none");
+    mobileMenuBackdrop?.classList.remove("opacity-0");
+    mobileMenuPanel?.classList.remove("translate-x-full");
+    menuOpenIcon?.classList.add("hidden");
+    menuCloseIcon?.classList.remove("hidden");
+  }
+
+  function closeMobileMenu() {
+    mobileMenu?.classList.add("pointer-events-none");
+    mobileMenuBackdrop?.classList.add("opacity-0");
+    mobileMenuPanel?.classList.add("translate-x-full");
+    menuOpenIcon?.classList.remove("hidden");
+    menuCloseIcon?.classList.add("hidden");
+  }
+
+  mobileMenuBtn?.addEventListener("click", () => {
+    if (mobileMenuPanel?.classList.contains("translate-x-full")) {
+      openMobileMenu();
+    } else {
+      closeMobileMenu();
     }
+  });
 
-    themeToggleBtn?.addEventListener("click", toggleTheme);
+  mobileMenuBackdrop?.addEventListener("click", closeMobileMenu);
 
-    // Mobile menu
-    const mobileMenuBtn = document.getElementById("mobile-menu-btn");
-    const mobileMenu = document.getElementById("mobile-menu");
-    const mobileMenuBackdrop = document.getElementById("mobile-menu-backdrop");
-    const mobileMenuPanel = document.getElementById("mobile-menu-panel");
-    const menuOpenIcon = document.getElementById("menu-open-icon");
-    const menuCloseIcon = document.getElementById("menu-close-icon");
-
-    function openMobileMenu() {
-      mobileMenu?.classList.remove("pointer-events-none");
-      mobileMenuBackdrop?.classList.remove("opacity-0");
-      mobileMenuPanel?.classList.remove("translate-x-full");
-      menuOpenIcon?.classList.add("hidden");
-      menuCloseIcon?.classList.remove("hidden");
-    }
-
-    function closeMobileMenu() {
-      mobileMenu?.classList.add("pointer-events-none");
-      mobileMenuBackdrop?.classList.add("opacity-0");
-      mobileMenuPanel?.classList.add("translate-x-full");
-      menuOpenIcon?.classList.remove("hidden");
-      menuCloseIcon?.classList.add("hidden");
-    }
-
-    mobileMenuBtn?.addEventListener("click", () => {
-      if (mobileMenuPanel?.classList.contains("translate-x-full")) {
-        openMobileMenu();
-      } else {
-        closeMobileMenu();
-      }
-    });
-
-    mobileMenuBackdrop?.addEventListener("click", closeMobileMenu);
-
-    // Close menu when clicking a link
-    document.querySelectorAll(".mobile-menu-link").forEach((link) => {
-      link.addEventListener("click", closeMobileMenu);
-    });
-  </script>
-</header>
+  // Close menu when clicking a link
+  document.querySelectorAll(".mobile-menu-link").forEach((link) => {
+    link.addEventListener("click", closeMobileMenu);
+  });
+</script>
