@@ -145,7 +145,7 @@ const navItems = [
   <!-- Menu Panel -->
   <div
     id="mobile-menu-panel"
-    class="absolute top-0 right-0 h-full w-[140px] bg-quartz transform translate-x-full transition-transform duration-300 shadow-2xl border-l border-white/10 flex flex-col"
+    class="absolute top-0 right-0 h-full w-[120px] bg-quartz transform translate-x-full transition-transform duration-300 shadow-2xl border-l border-white/10 flex flex-col"
   >
     <div class="py-10 pb-4 border-b border-white/5 text-center">
       <span
@@ -153,7 +153,7 @@ const navItems = [
         >Menu</span
       >
     </div>
-    <nav class="flex flex-col p-4 pt-4 gap-1 transform">
+    <nav class="flex flex-col p-2 pt-4 gap-1 transform">
       {
         navItems.map((item) => {
           const itemPath = item.href.startsWith("/#") ? "/" : item.href;
@@ -222,7 +222,7 @@ const navItems = [
     mobileMenuPanel?.classList.remove("translate-x-full");
     menuOpenIcon?.classList.add("hidden");
     menuCloseIcon?.classList.remove("hidden");
-    headerActions?.classList.add("-translate-x-[140px]");
+    headerActions?.classList.add("-translate-x-[120px]");
   }
 
   function closeMobileMenu() {
@@ -231,7 +231,7 @@ const navItems = [
     mobileMenuPanel?.classList.add("translate-x-full");
     menuOpenIcon?.classList.remove("hidden");
     menuCloseIcon?.classList.add("hidden");
-    headerActions?.classList.remove("-translate-x-[140px]");
+    headerActions?.classList.remove("-translate-x-[120px]");
   }
 
   mobileMenuBtn?.addEventListener("click", () => {
